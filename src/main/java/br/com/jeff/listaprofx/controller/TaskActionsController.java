@@ -19,15 +19,18 @@ public class TaskActionsController {
     private final TaskTableView taskTableView;
     private final ObservableList<Task> taskList;
 
+    
     public TaskActionsController(TaskController taskController,
-                                 TaskTableView taskTableView,
-                                 ObservableList<Task> taskList) {
-        this.taskController = taskController;
-        this.taskFormController = new TaskFormController(taskController); // referência correta
-        this.taskTableView = taskTableView;
-        this.taskList = taskList;
-    }
+					            TaskTableView taskTableView,
+					            TaskFormController taskFormController,
+					            ObservableList<Task> taskList) {
+		this.taskController = taskController;
+		this.taskFormController = taskFormController;
+		this.taskTableView = taskTableView;
+		this.taskList = taskList;
+	}
 
+    
     // ADD
     public void handleAdd() {
         taskFormController.openTaskFormDialog(null, taskList);
@@ -65,8 +68,6 @@ public class TaskActionsController {
                 taskList.remove(t);            // remove da lista visível
                 taskTableView.getCheckedTasks().remove(t); // limpe checkbox também
                 removedCount++;
-            } else {
-                // se falhar, você pode logar ou notificar. Aqui apenas continua.
             }
         }
 
@@ -118,7 +119,7 @@ public class TaskActionsController {
     }
     
     // utilitário para mensagens simples
-    private void showInfo(String title, String message) {
+    protected void showInfo(String title, String message) {
         Alert a = new Alert(AlertType.INFORMATION, message);
         a.setTitle(title);
         a.setHeaderText(null);
