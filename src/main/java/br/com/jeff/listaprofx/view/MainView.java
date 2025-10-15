@@ -1,12 +1,17 @@
-// MainView.java
 package br.com.jeff.listaprofx.view;
+
+import br.com.jeff.listaprofx.model.Task;
+
+import br.com.jeff.listaprofx.view.FilterPanel;
 
 import br.com.jeff.listaprofx.controller.TaskActionsController;
 import br.com.jeff.listaprofx.controller.TaskController;
-import br.com.jeff.listaprofx.model.Task;
+import br.com.jeff.listaprofx.controller.TaskFormController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.geometry.Insets;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -44,14 +49,16 @@ public class MainView {
         actionsBox.setPadding(new Insets(10));
         root.setBottom(actionsBox);
         
-        actionsController = new TaskActionsController(controller, taskTableView, taskList);
+        TaskFormController form = new TaskFormController(controller);
+        
+        actionsController = new TaskActionsController(controller, taskTableView, form, taskList);
 
         // --- Configurar ações ---
         setupActions();
         controller.setupActions(taskTableView, taskActionsView);
 
         // --- Cena ---
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root, 1100, 600);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
         primaryStage.setTitle("ListaPro FX");
