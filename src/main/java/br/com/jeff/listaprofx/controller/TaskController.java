@@ -66,6 +66,8 @@ public class TaskController {
         // Listener para checkbox
         taskTableView.getCheckedTasks()
             .addListener((ListChangeListener<Task>) change -> updateButtons(taskTableView, actionsView));
+        
+        updateButtons(taskTableView, actionsView);
     }
 
     private void updateButtons(TaskTableView tableView, TaskActionsView actionsView) {
